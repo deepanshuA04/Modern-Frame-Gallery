@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        // ✅ Using your actual DockerHub credentials ID
+        // DockerHub credentials
         DOCKERHUB_CREDENTIALS = credentials('a770410e-e187-4471-ac23-fcff1d67da43')
         IMAGE_NAME = 'deepanshua04/modern-gallery'
     }
@@ -36,28 +36,19 @@ pipeline {
 
         stage('Deploy GREEN Environment') {
             steps {
-                bat '''
-                echo Deploying GREEN environment...
-                bash scripts/deploy_green.sh
-                '''
+                bat 'scripts\\deploy_green.bat'
             }
         }
 
         stage('Smoke Test') {
             steps {
-                bat '''
-                echo Running Smoke Test on GREEN...
-                bash scripts/smoke_test.sh
-                '''
+                bat 'scripts\\smoke_test.bat'
             }
         }
 
         stage('Switch Traffic to GREEN') {
             steps {
-                bat '''
-                echo Switching traffic from BLUE to GREEN...
-                bash scripts/switch_traffic.sh
-                '''
+                bat 'scripts\\switch_traffic.bat'
             }
         }
     }
