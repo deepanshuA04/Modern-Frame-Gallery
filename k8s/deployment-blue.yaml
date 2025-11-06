@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: modern-gallery-blue
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: modern-gallery-blue
+  template:
+    metadata:
+      labels:
+        app: modern-gallery-blue
+    spec:
+      containers:
+      - name: modern-gallery
+        image: deepanshua04/modern-gallery:latest   # ✅ Your DockerHub image
+        ports:
+        - containerPort: 3000

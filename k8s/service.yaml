@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: modern-gallery-service
+spec:
+  selector:
+    app: modern-gallery-blue     # 🟦 Default traffic → BLUE
+  ports:
+  - port: 80
+    targetPort: 3000
+  type: LoadBalancer
